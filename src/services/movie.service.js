@@ -1,4 +1,5 @@
 const Movie = require("../models/movie.model");
+const mongoose = require('mongoose');
 
 const addMovie = async (data) => {
     try {
@@ -16,13 +17,17 @@ const addMovie = async (data) => {
     }
 }
 
-const updatedMovie = async (id, data) => {
+const updatedMovie = async (params, data) => {
     try {
-        const updatedMovie = await Movie.findByIdAndUpdate(id, data, { new: true });
+        const updatedMovie = await Movie.findByIdAndUpdate(
+            params.id,
+            data,
+            { new: true }
+        );
         return updatedMovie;
     } catch (error) {
-        throw new error('Error updating movie');
+        throw new Error(error);
     }
-}
+};
 
 module.exports = { addMovie, updatedMovie }
