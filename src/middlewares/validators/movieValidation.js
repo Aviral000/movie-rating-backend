@@ -14,7 +14,7 @@ const addMovieJoi = {
                 'any.required': 'Director is required'
             }),
         genre: Joi.array().items(
-            Joi.string().valid('Action', 'Comedy', 'Drama', 'Horror', 'Romance', 'Sci-Fi')
+            Joi.string().valid('action', 'comedy', 'drama', 'horror', 'romance', 'sci-Fi')
                 .required()
                 .messages({
                     'any.only': '{#label} must be one of [Action, Comedy, Drama, Horror, Romance, Sci-Fi]',
@@ -33,4 +33,13 @@ const addMovieJoi = {
     })
 }
 
-module.exports = { addMovieJoi }
+const updateMovieJoi = {
+    params: Joi.object({
+        id: Joi.string().required()
+            .messages({
+                "string.empty": "Updating a movie requires the movie id"
+            })
+    })
+}
+
+module.exports = { addMovieJoi, updateMovieJoi }

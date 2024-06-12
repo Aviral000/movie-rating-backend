@@ -1,4 +1,4 @@
-const { addMovieJoi } = require('./movieValidation');
+const { addMovieJoi, updateMovieJoi } = require('./movieValidation');
 
 const validMovieBody = (req, res, next) => {
     const { error } = addMovieJoi.body.validate(req.body);
@@ -10,4 +10,14 @@ const validMovieBody = (req, res, next) => {
     next();
 }
 
-module.exports = { validMovieBody }
+const validMovieParams = (req, res, next) => {
+    const { error } = updateMovieJoi.params.validate(req.params);
+
+    if(error) {
+        res.status(400).json({ message: error.details[0] })
+    }
+
+    next();
+}
+
+module.exports = { validMovieBody, validMovieParams }
