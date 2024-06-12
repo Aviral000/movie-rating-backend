@@ -8,7 +8,8 @@ require("dotenv").config();
 
 const userRouter = require("./routes/user.route");
 const movieRouter = require("./routes/movie.route");
-const jwtPassport = require("./config/passport")
+const reviewRouter = require("./routes/review.route");
+const jwtPassport = require("./config/passport");
 
 const app = express();
 
@@ -34,7 +35,8 @@ app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api/users", userRouter);
-app.use("/api/movie", movieRouter);
+app.use("/api/movies", movieRouter);
+app.use("/api/movies", reviewRouter);
 
 app.listen(8082, () => {
     console.log("listening");

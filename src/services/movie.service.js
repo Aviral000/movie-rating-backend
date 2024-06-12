@@ -30,4 +30,22 @@ const updatedMovie = async (params, data) => {
     }
 };
 
-module.exports = { addMovie, updatedMovie }
+const movieFromId = async (params) => {
+    try {
+        const movie = await Movie.findById(params.id);
+        return movie;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+const allMovies = async () => {
+    try {
+        const movies = await Movie.find({});
+        return movies;
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+module.exports = { addMovie, updatedMovie, movieFromId, allMovies }
